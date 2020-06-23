@@ -1,5 +1,14 @@
 # 全栈博客系统
 
+## 目录设计
+
+server：后端接口
+
+client：前台页面
+
+admin：后台页面
+
+
 ## 数据库设计
 
 文章：id、title、tag、publishTime、 content
