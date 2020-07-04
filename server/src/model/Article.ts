@@ -1,21 +1,20 @@
-import { IsDate, IsNotEmpty } from 'class-validator'
-
+import { ArrayMinSize, IsDate, IsNotEmpty } from 'class-validator'
 
 class Article {
 
-  @IsNotEmpty({message: '文章标题不可以为空'})
-  @Type(() => String)
+  @IsNotEmpty({ message: '文章标题不可以为空' })
   public title: string
 
-  @IsNotEmpty({message: '文章标签不可以为空'})
-  public tagList: string[] = ['']
+  @IsNotEmpty({ message: '文章标签不可以为空' })
+  @ArrayMinSize(1, { message: '文章标签至少有一个' })
+  public tagList: string[]
 
-  @IsNotEmpty({message: '发布日期不可以为空'})
+  @IsNotEmpty({ message: '发布日期不可以为空' })
   @IsDate()
-  public publishTime: Date = new Date()
+  public publishTime: Date
 
-  @IsNotEmpty({message: '文章内容不可以为空'})
-  public content: string = ''
+  @IsNotEmpty({ message: '文章内容不可以为空' })
+  public content: string
 }
 
 export default Article
