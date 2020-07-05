@@ -1,20 +1,17 @@
+import 'reflect-metadata'
 import Express from 'express'
 import articleRoute from './routes/articleRoute'
+import ArticleService from './services/ArticleService'
 import Article from './model/Article'
-import { validate } from 'class-validator'
+import { ArticleModel } from './db'
+import SearchCondition from './model/SearchCondition'
 
 const app = Express()
 
+app.use(Express.json())
+
 app.use('/api/article', articleRoute)
 
-const article = new Article()
 
-article.title = '12345'
-article.content = '123'
-article.publishTime = new Date()
-
-validate(article).then(errors => {
-  console.log(errors)
-})
 
 app.listen(3000, () => console.log('服务已开启！'))
