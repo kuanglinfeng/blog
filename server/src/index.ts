@@ -1,10 +1,6 @@
 import 'reflect-metadata'
 import Express from 'express'
 import articleRoute from './routes/articleRoute'
-import ArticleService from './services/ArticleService'
-import Article from './model/Article'
-import { ArticleModel } from './db'
-import SearchCondition from './model/SearchCondition'
 
 const app = Express()
 
