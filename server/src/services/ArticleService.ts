@@ -50,13 +50,25 @@ export default class {
     if (errors.length > 0) {
       return {count: 0, data: [], errors}
     }
-    const articles: IArticle[] = await ArticleModel.find({
-      title: {$regex: new RegExp(newSearchCondition.keyword)}
-    }).skip((newSearchCondition.page - 1) * newSearchCondition.limit).limit(newSearchCondition.limit)
+    let articles: IArticle[] = []
+    let count: number = 0
+    if (newSearchCondition.keywordProp === 'title') {
+      articles = await ArticleModel.find({
+        title: {$regex: new RegExp(newSearchCondition.keyword)}
+      }).skip((newSearchCondition.page - 1) * newSearchCondition.limit).limit(newSearchCondition.limit)
 
-    const count = await ArticleModel.find({
-      title: {$regex: new RegExp(newSearchCondition.keyword)}
-    }).countDocuments()
+      count = await ArticleModel.find({
+        title: {$regex: new RegExp(newSearchCondition.keyword)}
+      }).countDocuments()
+    } else {
+      articles = await ArticleModel.find({
+        tagList: {"$in": [newSearchCondition.keyword]}
+      }).skip((newSearchCondition.page - 1) * newSearchCondition.limit).limit(newSearchCondition.limit)
+
+      count = await ArticleModel.find({
+        tagList: {"$in": [newSearchCondition.keyword]}
+      }).countDocuments()
+    }
 
     return {count, data: articles, errors: []}
   }

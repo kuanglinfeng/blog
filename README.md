@@ -11,7 +11,9 @@ admin：后台页面
 
 ## 数据库设计
 
-文章：id、title、tag、publishTime、 content
+文章：id、title、tagList、publishTime、 content
+
+启动：mongod --config /usr/local/etc/mongod.conf
 
 ## 前台请求服务器的接口设计
 

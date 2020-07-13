@@ -15,6 +15,9 @@ export default class SearchCondition extends BaseEntity {
   public limit: number = 10
 
   @Type(() => String)
+  public keywordProp: 'title' | 'tagList' = 'title'
+
+  @Type(() => String)
   public keyword: string = ''
 
   public static transform(plainObject: object): SearchCondition {
