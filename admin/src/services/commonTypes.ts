@@ -17,7 +17,7 @@ export interface IResponsePageData<T> {
 export interface ISearchCondition {
   page?: number
   limit?: number
-  keywordProp?: string
+  keywordProp?: 'title' | 'tagList'
   keyword?: string
 }
 
