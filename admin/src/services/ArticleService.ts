@@ -16,7 +16,7 @@ export default class ArticleService {
     return data
   }
 
-  public static async getArticles(condition: ISearchCondition): Promise<IResponsePageData<IArticle> | null> {
+  public static async getArticles(condition: ISearchCondition): Promise<IResponsePageData<IArticle>> {
     const { data } = await axios.get('/api/article', {
       params: condition
     })

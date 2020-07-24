@@ -5,7 +5,7 @@ import {
   SaveArticleAction,
   SetLoadingAction,
   SetSearchConditionAction
-} from '../actions/articleActions'
+} from '../actions/ArticleActions'
 import { ArticleActionTypeEnums } from '../actions/ActionTypes'
 
 // 让ISearchCondition接口里的类型都变为必填的
@@ -36,7 +36,9 @@ export const initialState: IArticleState = {
 function saveArticle(state: IArticleState, action: SaveArticleAction): IArticleState {
   return {
     ...state,
-    data: action.payload.articles
+    data: action.payload.articles,
+    total: action.payload.total,
+    totalPage: Math.ceil(action.payload.total / state.searchCondition.limit)
   }
 }
 
@@ -60,12 +62,14 @@ function setSearchCondition(state: IArticleState, action: SetSearchConditionActi
 }
 
 function deleteArticle(state: IArticleState, action: DeleteArticleAction): IArticleState {
-  return {
+  const newState = {
     ...state,
     data: state.data.filter(article => article._id !== action.payload),
     total: state.total - 1,
     totalPage: Math.ceil((state.total - 1) / state.searchCondition.limit)
   }
+  console.log(newState)
+  return newState
 }
 
 
@@ -77,10 +81,10 @@ export default (state: IArticleState = initialState, action: ArticleActions): IA
     return setLoading(state, action)
   }
   if (action.type === ArticleActionTypeEnums.SetSearchCondition) {
-    setSearchCondition(state, action)
+    return setSearchCondition(state, action)
   }
   if (action.type === ArticleActionTypeEnums.Delete) {
-    deleteArticle(state, action)
+    return deleteArticle(state, action)
   }
   return state
 }
