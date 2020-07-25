@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react'
+import React, { Dispatch, useContext, useEffect } from 'react'
 import { Button, Input, message, Popconfirm, Table, Tag } from 'antd'
 import Day from '../../utils/Day'
 import { ColumnProps, TablePaginationConfig } from 'antd/es/table'
@@ -15,6 +15,7 @@ import { ISearchCondition } from '../../services/commonTypes'
 import { PaginationConfig } from 'antd/es/pagination'
 import { IArticleState } from '../../redux/reducers/articleReducer'
 import { SearchOutlined } from '@ant-design/icons/lib'
+import { ArticleActions } from '../../redux/actions/ArticleActions'
 
 interface IArticleItem {
   key?: string
@@ -25,81 +26,72 @@ interface IArticleItem {
   content?: string
 }
 
-export default function () {
+/**
+ * 当查询条件改变的时候，重新去请求数据
+ * @param dispatch
+ * @param searchCondition
+ */
+async function getArticles(dispatch: Dispatch<ArticleActions>, searchCondition: ISearchCondition) {
+  dispatch(createSetLoadingAction(true))
+  dispatch(createSetSearchConditionAction(searchCondition))
+  const data = await ArticleService.getArticles(searchCondition)
+  dispatch(createSaveArticleAction(data.data, data.total))
+  dispatch(createSetLoadingAction(false))
+}
 
-  const { state, dispatch } = useContext(Context)!
-
-  /**
-   * 当查询条件改变的时候，重新去请求数据
-   * @param searchCondition
-   */
-  async function getArticles(searchCondition: ISearchCondition) {
-    // 获取电影数据
-    dispatch(createSetLoadingAction(true))
-    dispatch(createSetSearchConditionAction(searchCondition))
-    const data = await ArticleService.getArticles(searchCondition)
-    dispatch(createSaveArticleAction(data.data, data.total))
-    dispatch(createSetLoadingAction(false))
+function getFilterDropDown(state: IArticleState, dispatch: Dispatch<ArticleActions>, keywordProp: 'title' | 'tagList') {
+  return function () {
+    return (
+      <div style={ { padding: 8 } }>
+        <Input
+          style={ { width: 188, marginBottom: 8, display: 'block' } }
+          value={ state.searchCondition.keyword }
+          onChange={ (e) => {
+            dispatch(createSetSearchConditionAction({ keyword: e.target.value }))
+          } }
+          onPressEnter={ async () => {
+            await getArticles(dispatch, { page: 1, keywordProp: keywordProp, keyword: state.searchCondition.keyword })
+          } }
+        />
+        <Button
+          type='primary'
+          size='small'
+          style={ { width: 90, marginRight: 8 } }
+          onClick={ async () => {
+            await getArticles(dispatch, { page: 1, keywordProp: keywordProp, keyword: state.searchCondition.keyword })
+          } }
+        >
+          搜索
+        </Button>
+        <Button
+          size='small'
+          style={ { width: 90 } }
+          onClick={ async () => {
+            dispatch(createSetSearchConditionAction({ keyword: '' }))
+            await getArticles(dispatch, { page: 1 })
+          } }
+        >
+          重置
+        </Button>
+      </div>
+    )
   }
+}
 
-  useEffect(() => {
-    getArticles(state.searchCondition)
-  }, [])
-
-  function getFilterDropDown(keywordProp: 'title' | 'tagList') {
-
-    return function (p: Object) {
-      return (
-        <div style={ { padding: 8 } }>
-          <Input
-            style={ { width: 188, marginBottom: 8, display: 'block' } }
-            value={ state.searchCondition.keyword }
-            onChange={ (e) => {
-              dispatch(createSetSearchConditionAction({ keyword: e.target.value }))
-            } }
-            onPressEnter={ () => {
-              getArticles({ page: 1, keywordProp: keywordProp, keyword: state.searchCondition.keyword })
-            } }
-          />
-          <Button
-            type='primary'
-            size='small'
-            style={ { width: 90, marginRight: 8 } }
-            onClick={ () => {
-              getArticles({ page: 1, keywordProp: keywordProp, keyword: state.searchCondition.keyword })
-            } }
-          >
-            搜索
-          </Button>
-          <Button
-            size='small'
-            style={ { width: 90 } }
-            onClick={ () => {
-              dispatch(createSetSearchConditionAction({ keyword: '' }))
-              getArticles({ page: 1 })
-            } }
-          >
-            重置
-          </Button>
-        </div>
-      )
-    }
-  }
-
-
-  const columns: ColumnProps<IArticleItem>[] = [
+function getColumns(state: IArticleState, dispatch: Dispatch<ArticleActions>): ColumnProps<IArticleItem>[] {
+  return ([
     {
       title: '标题',
       dataIndex: 'title',
       key: 'title',
-      filterDropdown: getFilterDropDown('title'),
+      filterDropdown: getFilterDropDown(state, dispatch, 'title'),
       filterIcon: <SearchOutlined />
     },
     {
       title: '标签',
       dataIndex: 'tagList',
       key: 'tagList',
-      filterDropdown: getFilterDropDown('tagList'),
+      filterDropdown: getFilterDropDown(state, dispatch, 'tagList'),
       filterIcon: <SearchOutlined />,
       render: (tagList: string[]) => (
         <>
@@ -146,7 +138,7 @@ export default function () {
                 await ArticleService.delete(record._id!)
                 dispatch(createDeleteArticleAction(record._id!))
                 dispatch(createSetLoadingAction(false))
-                await getArticles(state.searchCondition)
+                await getArticles(dispatch, state.searchCondition)
                 message.success('删除成功')
               } }
               okText='确定'
@@ -155,39 +147,50 @@ export default function () {
               <Button type='primary' danger>删除</Button>
             </Popconfirm>
           </div>
-
         )
       },
     },
-  ]
+  ])
+}
 
-  function getPageConfig(state: IArticleState): TablePaginationConfig | false {
-    if (state.total === 0) return false
-    return {
-      current: state.searchCondition.page,
-      pageSize: state.searchCondition.limit,
-      total: state.total,
-      showSizeChanger: true,
-      onShowSizeChange(current, pageSize) {
-        getArticles({ limit: pageSize })
-      }
+function getPageConfig(state: IArticleState, dispatch: Dispatch<ArticleActions>): TablePaginationConfig | false {
+  if (state.total === 0) return false
+  return {
+    current: state.searchCondition.page,
+    pageSize: state.searchCondition.limit,
+    total: state.total,
+    showSizeChanger: true,
+    onShowSizeChange: async (current, pageSize) => {
+      await getArticles(dispatch, { limit: pageSize })
     }
   }
+}
 
-  function handleChange(pagination: PaginationConfig, filters: any) {
-    getArticles({ page: pagination.current, limit: pagination.pageSize })
+function ArticleList() {
+
+  const { state, dispatch } = useContext(Context)!
+
+  useEffect(() => {
+    (async () => {
+      await getArticles(dispatch, state.searchCondition)
+    })()
+  }, [])
+
+  const handleChange = async (pagination: PaginationConfig, filters: any) => {
+    await getArticles(dispatch, { page: pagination.current, limit: pagination.pageSize })
   }
-
 
   return (
     <Table
       dataSource={ state.data }
-      columns={ columns }
+      columns={ getColumns(state, dispatch) }
       loading={ state.isLoading }
       rowKey="_id"
-      pagination={ getPageConfig(state) }
+      pagination={ getPageConfig(state, dispatch) }
       // @ts-ignore
       onChange={ handleChange }
     />
   )
 }
+
+export default ArticleList

@@ -8,7 +8,7 @@ import EditArticle from 'pages/article/EditArticle'
 const { Header, Sider, Content } = Layout
 
 
-const _Layout: React.FC = () => {
+const Home: React.FC = () => {
   return (
     <div className='container'>
       <Layout>
@@ -43,4 +43,4 @@ const _Layout: React.FC = () => {
   )
 }
 
-export default _Layout
+export default Home
