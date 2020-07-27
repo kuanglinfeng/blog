@@ -34,7 +34,7 @@ const Home: React.FC = () => {
               <Route path='/' component={ArticleList} exact />
               <Route path='/article' component={ArticleList} exact />
               <Route path='/article/add' component={AddArticle} exact />
-              <Route path='/article/add/:id' component={EditArticle} exact />
+              <Route path='/article/edit/:id' component={EditArticle} exact />
             </div>
           </Content>
         </Layout>

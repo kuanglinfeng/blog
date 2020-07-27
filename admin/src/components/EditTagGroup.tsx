@@ -3,7 +3,7 @@ import { PlusOutlined } from '@ant-design/icons'
 import React, { useEffect, useRef, useState } from 'react'
 
 interface IState {
-  tags: string[]
+  tagList: string[]
   inputVisible: boolean
   inputValue: string
   editInputIndex: number
@@ -12,13 +12,13 @@ interface IState {
 
 interface IProps {
   value?: string[]
-  onChange?: (tags: string[]) => void
+  onChange?: (tagList: string[]) => void
 }
 
 function EditTagGroup(props: IProps) {
 
   const [state, setState] = useState({
-    tags: props.value ? props.value : [],
+    tagList: [],
     inputVisible: false,
     inputValue: '',
     editInputIndex: -1,
@@ -29,13 +29,20 @@ function EditTagGroup(props: IProps) {
   let editInput = useRef<Input>(null)
 
   const handleClose = (removedTag: string) => {
-    const tags = state.tags.filter(tag => tag !== removedTag)
-    setState({ ...state, tags })
+    const tagList = state.tagList.filter(tag => tag !== removedTag)
+    setState({ ...state, tagList: tagList })
   }
 
   const showInput = () => {
     setState({ ...state, inputVisible: true })
   }
+
+  useEffect(() => {
+    if (props && props.value) {
+      setState({ ...state, tagList: props.value })
+    }
+  }, [props.value])
+
 
   useEffect(() => {
     if (state.inputVisible) {
@@ -51,9 +58,9 @@ function EditTagGroup(props: IProps) {
 
   useEffect(() => {
     // 抛给父组件
-    props.onChange!(state.tags)
+    props.onChange!(state.tagList)
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [state.tags])
+  }, [state.tagList])
 
   const handleInputChange = (e: any) => {
     setState({ ...state, inputValue: e.target.value })
@@ -61,13 +68,13 @@ function EditTagGroup(props: IProps) {
 
   const handleInputConfirm = () => {
     const { inputValue } = state
-    let { tags } = state
-    if (inputValue && tags.indexOf(inputValue) === -1) {
-      tags = [...tags, inputValue]
+    let { tagList } = state
+    if (inputValue && tagList.indexOf(inputValue) === -1) {
+      tagList = [...tagList, inputValue]
     }
     setState({
       ...state,
-      tags,
+      tagList: tagList,
       inputVisible: false,
       inputValue: '',
     })
@@ -78,18 +85,18 @@ function EditTagGroup(props: IProps) {
   }
 
   const handleEditInputConfirm = () => {
-    const newTags = [...state.tags]
+    const newTags = [...state.tagList]
     if (newTags.indexOf(state.editInputValue) === -1) {
       newTags[state.editInputIndex] = state.editInputValue
     }
-    setState({ ...state, tags: newTags, editInputIndex: -1, editInputValue: '' })
+    setState({ ...state, tagList: newTags, editInputIndex: -1, editInputValue: '' })
   }
 
-  const { tags, inputVisible, inputValue, editInputIndex, editInputValue } = state
+  const { tagList, inputVisible, inputValue, editInputIndex, editInputValue } = state
 
   return (
     <div className='tagGroup'>
-      { tags.map((tag, index) => {
+      { tagList.map((tag, index) => {
         if (editInputIndex === index) {
           return (
             <Input

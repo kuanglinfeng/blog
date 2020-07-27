@@ -128,7 +128,7 @@ function getColumns(state: IArticleState, dispatch: Dispatch<ArticleActions>): C
       render: (id: string, record) => {
         return (
           <div>
-            <NavLink to={ `/movie/edit/${ record._id }` }>
+            <NavLink to={ `/article/edit/${ record._id }` }>
               <Button type='primary'>编辑</Button>
             </NavLink>
             <Popconfirm
