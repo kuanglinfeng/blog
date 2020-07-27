@@ -26,3 +26,16 @@ code {
 .main {
   padding: 1em;
 }
+
+.tagGroup .site-tag-plus {
+  background: #fff;
+  border-style: dashed;
+}
+.tagGroup .edit-tag {
+  user-select: none;
+}
+.tagGroup .tag-input {
+  width: 78px;
+  margin-right: 8px;
+  vertical-align: top;
+}

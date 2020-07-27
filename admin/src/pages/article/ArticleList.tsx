@@ -174,6 +174,7 @@ function ArticleList() {
     (async () => {
       await getArticles(dispatch, state.searchCondition)
     })()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   const handleChange = async (pagination: PaginationConfig, filters: any) => {
