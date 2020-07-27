@@ -11,13 +11,14 @@ interface IState {
 }
 
 interface IProps {
-  onAddTags: (tags: string[]) => void
+  value?: string[]
+  onChange?: (tags: string[]) => void
 }
 
 function EditTagGroup(props: IProps) {
 
   const [state, setState] = useState({
-    tags: [],
+    tags: props.value ? props.value : [],
     inputVisible: false,
     inputValue: '',
     editInputIndex: -1,
@@ -50,7 +51,7 @@ function EditTagGroup(props: IProps) {
 
   useEffect(() => {
     // 抛给父组件
-    props.onAddTags(state.tags)
+    props.onChange!(state.tags)
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [state.tags])
 

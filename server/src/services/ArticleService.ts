@@ -55,7 +55,7 @@ export default class {
     if (newSearchCondition.keywordProp === 'title') {
       articles = await ArticleModel.find({
         title: {$regex: new RegExp(newSearchCondition.keyword)}
-      }).skip((newSearchCondition.page - 1) * newSearchCondition.limit).limit(newSearchCondition.limit)
+      }).sort({publishTime: -1}).skip((newSearchCondition.page - 1) * newSearchCondition.limit).limit(newSearchCondition.limit)
 
       count = await ArticleModel.find({
         title: {$regex: new RegExp(newSearchCondition.keyword)}
@@ -63,7 +63,7 @@ export default class {
     } else {
       articles = await ArticleModel.find({
         tagList: {"$in": [newSearchCondition.keyword]}
-      }).skip((newSearchCondition.page - 1) * newSearchCondition.limit).limit(newSearchCondition.limit)
+      }).sort({publishTime: -1}).skip((newSearchCondition.page - 1) * newSearchCondition.limit).limit(newSearchCondition.limit)
 
       count = await ArticleModel.find({
         tagList: {"$in": [newSearchCondition.keyword]}
