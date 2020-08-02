@@ -41,8 +41,8 @@ function EditTagGroup(props: IProps) {
     if (props && props.value) {
       setState({ ...state, tagList: props.value })
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [props.value])
-
 
   useEffect(() => {
     if (state.inputVisible) {
