@@ -1,9 +1,10 @@
 import React from 'react'
+import ArticleList from '../components/ArticleList'
 
 export default function () {
   return (
     <div>
-      首页
+      <ArticleList />
     </div>
   )
 }

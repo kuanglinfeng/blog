@@ -18,11 +18,18 @@ const SearchInput = styled.input`
   &:focus {
     border-color: #34ADB5;
   }
+  &::placeholder {
+    font-size: 12px;
+    color: #ccc;
+  }
+  @media (max-width: 980px) {
+    display: none;
+  }
 `
 
 export default function () {
 
   return (
-    <SearchInput />
+    <SearchInput placeholder='搜索文章'/>
   )
 }
