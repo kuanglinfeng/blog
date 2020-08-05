@@ -1,10 +1,11 @@
 import React from 'react'
 import styled from 'styled-components'
-import articleList from '../data/articleList'
+// import articleList from '../data/articleList'
 import handleMarkDownText from '../utils/handleMarkDownText'
 import { NavLink as Link } from 'react-router-dom'
+import { IArticle } from '../types/commonTypes'
 
-const data = articleList[0]
+// const data = articleList[0]
 
 const ArticleItem = styled.div`
   background: #fff;
@@ -57,25 +58,28 @@ const TagItem = styled.li`
 `
 
 
-export default function () {
+export default function (props: IArticle) {
 
   return (
     <ArticleItem>
       <Title>
-        <Link to={`/detail/${data._id}`}>
-          {data.title}
+        <Link to={`/detail/${props._id}`}>
+          {props.title}
         </Link>
       </Title>
       <TimeTagWrapper>
-        <PublishTime>{data.publishTime.toLocaleDateString()}</PublishTime>
+        <PublishTime>
+          {props.publishTime.toLocaleDateString ? props.publishTime.toLocaleDateString() :  new Date(props.publishTime).toLocaleDateString()}
+        </PublishTime>
 
         <TagList>
-          <TagItem>{data.tagList[0]}</TagItem>
-          <TagItem>{data.tagList[1]}</TagItem>
+          {
+            props.tagList.map((tag) => <TagItem key={tag}>{tag}</TagItem>)
+          }
         </TagList>
 
       </TimeTagWrapper>
-      <Content>{handleMarkDownText(data.content).slice(0, 500).concat('...')}</Content>
+      <Content>{handleMarkDownText(props.content).slice(0, 500).concat('...')}</Content>
 
     </ArticleItem>
   )

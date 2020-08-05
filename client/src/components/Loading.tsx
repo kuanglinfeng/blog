@@ -29,7 +29,6 @@ const stretchHeight = keyframes`
 
 interface IProps {
   isBlur?: boolean
-  isLoading?: boolean
 }
 
 const Wriggle = styled.div`
@@ -57,7 +56,6 @@ const Loading = styled.div``
 
 export default function (props: IProps) {
   return (
-    props.isLoading ?
       <Wrapper isBlur={props.isBlur}>
         <Loading>
           <Wriggle>
@@ -69,6 +67,6 @@ export default function (props: IProps) {
           </Wriggle>
           <Tip>Loading...</Tip>
         </Loading>
-      </Wrapper> : null
+      </Wrapper>
   )
 }
