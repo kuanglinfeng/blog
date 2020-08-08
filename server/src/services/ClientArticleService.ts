@@ -12,4 +12,9 @@ export default class {
   public static async getArticles(): Promise<IArticle[] | null> {
     return ArticleModel.find({}).sort({publishTime: -1})
   }
+
+  public static async filterArticleById(id: string): Promise<IArticle | null> {
+    return ArticleModel.findById(id)
+  }
+
 }

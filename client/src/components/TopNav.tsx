@@ -36,6 +36,7 @@ const MenuButton = styled.div`
 `
 
 const AsideNav = styled.ul`
+  list-style: none;
   display: none;
   @media (max-width: 740px) {
     display:block;
@@ -43,7 +44,7 @@ const AsideNav = styled.ul`
     top: 50px; left: 0;
     background: #eee;
     padding: 10px 10px 10px 20px;
-    width: 100vw;
+    width: 100%;
   }
 `
 
@@ -52,7 +53,6 @@ const AsideNavItem = styled.li`
     margin-top: 0.5em;
     line-height: 1.5em;
     padding-left: 1em;
-    //color: #34ADB5;
   }
 `
 
@@ -90,6 +90,7 @@ const Tip = styled.span`
 `
 
 const Menu = styled.ul`
+  list-style: none;
   display:flex;
   align-items: center;
   white-space: nowrap;
@@ -134,9 +135,9 @@ export default function () {
           </AsideNav>) : null
         }
         <TipWrapper>
-          <Link to='/'>
+          <a href='/'>
             <Logo src={ logo } />
-          </Link>
+          </a>
           <Tip>匡琳锋的个人博客</Tip>
         </TipWrapper>
         <Search />

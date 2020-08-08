@@ -15,4 +15,14 @@ router.get('/articles', async (request, response) => {
   }
 })
 
+router.get('/detail/:id', async (request, response) => {
+  try {
+    const id: string = request.params.id
+    const article = await ClientArticleService.filterArticleById(id)
+    ResponseHelper.sendData(article, response)
+  } catch (e) {
+    ResponseHelper.sendData(null, response)
+  }
+})
+
 export default router

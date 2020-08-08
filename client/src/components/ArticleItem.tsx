@@ -1,13 +1,10 @@
 import React from 'react'
 import styled from 'styled-components'
-// import articleList from '../data/articleList'
 import handleMarkDownText from '../utils/handleMarkDownText'
 import { NavLink as Link } from 'react-router-dom'
 import { IArticle } from '../types/commonTypes'
 
-// const data = articleList[0]
-
-const ArticleItem = styled.div`
+export const ArticleItem = styled.div`
   background: #fff;
   border-radius: 4px;
   padding: 8px 16px;
@@ -15,7 +12,7 @@ const ArticleItem = styled.div`
   color: #888;
 `
 
-const Title = styled.h2`
+export const Title = styled.h2`
   font-size: 1.2em;
   font-weight: normal;
   margin: 0.5em 0;
@@ -33,33 +30,31 @@ const Content = styled.p`
   font-size: 13px;
 `
 
-const TimeTagWrapper = styled.span`
+export const TimeTagWrapper = styled.span`
   font-size: 12px;
   display:flex;
   align-items: center;
 `
 
-const PublishTime = styled.span`
+export const PublishTime = styled.span``
 
-`
-
-const TagList = styled.ul`
+export const TagList = styled.ul`
   padding: 0;
   margin: 8px 0;
   display:flex;
   font-size: 12px;
   align-items: center;
   line-height: 1.5em;
+  list-style: none;
 `
-const TagItem = styled.li`
-  padding: 2px;
+export const TagItem = styled.li`
   background: #f6f6f6;
   margin-left: 1em;
+  padding: 0 7px;
+  border-radius: 2px;
 `
 
-
 export default function (props: IArticle) {
-
   return (
     <ArticleItem>
       <Title>
@@ -71,16 +66,13 @@ export default function (props: IArticle) {
         <PublishTime>
           {props.publishTime.toLocaleDateString ? props.publishTime.toLocaleDateString() :  new Date(props.publishTime).toLocaleDateString()}
         </PublishTime>
-
         <TagList>
           {
             props.tagList.map((tag) => <TagItem key={tag}>{tag}</TagItem>)
           }
         </TagList>
-
       </TimeTagWrapper>
       <Content>{handleMarkDownText(props.content).slice(0, 500).concat('...')}</Content>
-
     </ArticleItem>
   )
 }

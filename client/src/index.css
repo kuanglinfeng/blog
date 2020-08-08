@@ -13,15 +13,21 @@ body {
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
-}
-
-ul, ol {
-  list-style: none;
+  font-family: "SFMono-Regular", "Consolas", "Liberation Mono", "Menlo", "monospace";
+  padding: 2px 4px;
+  border: none;
+  font-size: 14px;
+  color: #c7254e;
+  background-color: #f2f2f2;
+  vertical-align: middle;
+  white-space: pre-wrap;
 }
 
 a {
   text-decoration: none;
   color: inherit; /* blue colors for links too */
+}
+
+.imBBtt {
+  border: none!important;
 }
