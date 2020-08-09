@@ -5,6 +5,8 @@ import { ArticleItem, PublishTime, TagItem, TagList, Title } from '../components
 import ArticleServices from '../services/ArticleServices'
 import { IArticle } from '../types/commonTypes'
 import Markdown from '../components/Markdown'
+import Loading from '../components/Loadings/Loading'
+import Spin from '../components/Loadings/Spin'
 
 interface IParams {
   id: string
@@ -57,18 +59,18 @@ export default function () {
         article ?
           <DetailArticleItem>
             <DetailTitle>
-                {article.title}
+              { article.title }
             </DetailTitle>
-              <DetailTagList>
-                {
-                  article.tagList.map((tag) => <DetailTagItem key={tag}>{tag}</DetailTagItem>)
-                }
-              </DetailTagList>
+            <DetailTagList>
+              {
+                article.tagList.map((tag) => <DetailTagItem key={ tag }>{ tag }</DetailTagItem>)
+              }
+            </DetailTagList>
             <DetailPublishTime>
-              {article.publishTime.toLocaleDateString ? article.publishTime.toLocaleDateString() :  new Date(article.publishTime).toLocaleDateString()}
+              { article.publishTime.toLocaleDateString ? article.publishTime.toLocaleDateString() : new Date(article.publishTime).toLocaleDateString() }
             </DetailPublishTime>
-            <Markdown content={article.content} />
-          </DetailArticleItem>: null
+            <Markdown content={ article.content } />
+          </DetailArticleItem> : <Spin />
       }
     </div>
   )

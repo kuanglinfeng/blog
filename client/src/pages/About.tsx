@@ -32,7 +32,13 @@ export default function () {
       <Title>关于博客</Title>
       <List>
         <ListItem>
-          博客使用到的主要技术栈为React & TypeScript，前端UI由自己设计，后端管理系统UI使用了Ant Design，前后端均由本人编写。
+          博客前端使用到的主要技术栈为React & TypeScript，前端UI由自己设计，后端管理系统UI使用了Ant Design。
+        </ListItem>
+        <ListItem>
+          博客后端使用到的主要技术栈为Express & TypeScript，使用的数据库驱动是Mongoose。
+        </ListItem>
+        <ListItem>
+          博客系统前后端均由本人一人完成，目前博客系统版本号为0.0.1。
         </ListItem>
         <ListItem>
           博客内容为学习工作过程中的一些技术总结和日志琐事，除非特殊声明，博客内容皆为个人原创，转载请标注文章来源哦。

@@ -1,7 +1,7 @@
 import React from 'react'
 import styled, { keyframes } from 'styled-components'
 
-const Wrapper = styled.div`
+export const Wrapper = styled.div`
   background: ${(props: IProps) => props.isBlur ? 'rgba(52, 173, 181, .1)' : 'transparent'};
   display: flex;
   flex-direction: column;
