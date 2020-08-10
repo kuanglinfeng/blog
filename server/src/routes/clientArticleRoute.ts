@@ -3,6 +3,7 @@
 import ClientArticleService from '../services/ClientArticleService'
 import ResponseHelper from './ResponseHelper'
 import Express from 'express'
+import ArticleService from '../services/ArticleService'
 
 const router = Express.Router()
 
@@ -24,5 +25,13 @@ router.get('/detail/:id', async (request, response) => {
     ResponseHelper.sendData(null, response)
   }
 })
+
+// 根据标题或者标签查询多篇文章 这里用query
+router.get('/search', async (request, response) => {
+  // @ts-ignore
+  const result = await ClientArticleService.search(request.query)
+  ResponseHelper.sendData(result, response)
+})
+
 
 export default router

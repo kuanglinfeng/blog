@@ -7,6 +7,11 @@
 import { IArticle } from '../db/ArticleSchema'
 import { ArticleModel } from '../db'
 
+type ClientSearchCondition = {
+  keywordProp: 'title' | 'tag'
+  keyword: string
+}
+
 export default class {
 
   public static async getArticles(): Promise<IArticle[] | null> {
@@ -17,4 +22,24 @@ export default class {
     return ArticleModel.findById(id)
   }
 
+  public static async filterArticlesByTitle(title: string): Promise<IArticle[] | null> {
+    return ArticleModel.find({
+      title: { $regex: new RegExp(title) }
+    })
+  }
+
+  public static async filterArticlesByTag(tag: string): Promise<IArticle[] | null> {
+    return ArticleModel.find({
+      tagList: {"$in": [tag]}
+    })
+  }
+
+  public static async search(condition: ClientSearchCondition) {
+    if (condition.keywordProp === 'title') {
+      return this.filterArticlesByTitle(condition.keyword)
+    }
+    if (condition.keywordProp === 'tag') {
+      return this.filterArticlesByTag(condition.keyword)
+    }
+  }
 }
