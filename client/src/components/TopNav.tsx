@@ -4,6 +4,7 @@ import logo from '../assets/logo.png'
 import menu from '../assets/menu.png'
 import Search from './Search'
 import { NavLink as Link } from 'react-router-dom'
+import SearchWindow from './SearchWindow'
 
 const TopNav = styled.nav`
   background: #fff;
@@ -112,13 +113,39 @@ const MenuItem = styled.li`
 export default function () {
 
   const [asideVisible, setAsideVisible] = useState<boolean>(false)
+  const [searchWindowVisible, setSearchWindowVisible] = useState<boolean>(false)
+  const [keyword, setKeyword] = useState<string>('')
 
   const handleMenuButtonClick = () => {
     setAsideVisible(!asideVisible)
   }
 
+  const handleSearchInputSubmit = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.keyCode === 13) {
+      setSearchWindowVisible(true)
+    }
+  }
+
+  const handleSearchInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setKeyword(e.target.value)
+  }
+
+  const onSearchWindowClose = () => {
+    setSearchWindowVisible(false)
+  }
+
+  const handleSearchWindowChange = (value: string) => {
+    setKeyword(value)
+  }
+
   return (
     <TopNav>
+      <SearchWindow
+        visible={searchWindowVisible}
+        onClose={onSearchWindowClose}
+        value={keyword}
+        onChange={handleSearchWindowChange}
+      />
       <TopNavCenter>
         <MenuButton onClick={ handleMenuButtonClick } />
         {
@@ -140,7 +167,7 @@ export default function () {
           </a>
           <Tip>匡琳锋的个人博客</Tip>
         </TipWrapper>
-        <Search />
+        <Search onSubmit={handleSearchInputSubmit} onChange={handleSearchInputChange} value={keyword}/>
         <Menu>
           <MenuItem>
             <Link to='/'>首页</Link>

@@ -22,7 +22,7 @@ export default class {
     return data
   }
 
-  public static async search(condition: SearchCondition): Promise<IResponseData<IArticle>[]> {
+  public static async search(condition: SearchCondition): Promise<IResponseData<IArticle[]>> {
     const {data} = await axios.get('/search', {
       params: condition
     })

@@ -72,7 +72,7 @@ export default function (props: IArticle) {
           }
         </TagList>
       </TimeTagWrapper>
-      <Content>{handleMarkDownText(props.content).slice(0, 500).concat('...')}</Content>
+      <Content>{handleMarkDownText(props.content)}</Content>
     </ArticleItem>
   )
 }

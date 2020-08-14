@@ -27,9 +27,20 @@ const SearchInput = styled.input`
   }
 `
 
-export default function () {
+interface IProps {
+  value: string
+  onSubmit: (e: any) => void
+  onChange: (e: any) => void
+}
+
+export default function (props: IProps) {
 
   return (
-    <SearchInput placeholder='搜索文章'/>
+    <SearchInput
+      placeholder='搜索文章'
+      onKeyDown={props.onSubmit}
+      onChange={props.onChange}
+      value={props.value}
+    />
   )
 }

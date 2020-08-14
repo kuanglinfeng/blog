@@ -4,5 +4,5 @@ export default function (text: string) {
   text = text.replace(/#+/ig, '')
   text = text.replace(/-/ig, ' ')
   text = text.replace(/\*+/ig, ' ')
-  return text
+  return text.slice(0, 500).concat('...')
 }
