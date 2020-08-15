@@ -8,6 +8,11 @@ body {
   font-size: 1rem;
 }
 
+body.onModal {
+  overflow: hidden;
+  height: 100%;
+}
+
 * {
   box-sizing: border-box;
 }
@@ -26,8 +31,4 @@ code {
 a {
   text-decoration: none;
   color: inherit; /* blue colors for links too */
-}
-
-.imBBtt {
-  border: none!important;
 }

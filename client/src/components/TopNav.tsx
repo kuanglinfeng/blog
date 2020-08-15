@@ -131,6 +131,8 @@ export default function () {
   }
 
   const onSearchWindowClose = () => {
+    // 使body滚动条重新出现
+    document.body.classList.remove('onModal');
     setSearchWindowVisible(false)
   }
 

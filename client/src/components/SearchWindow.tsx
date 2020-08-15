@@ -1,21 +1,19 @@
-import React, { useEffect, useState } from 'react'
-import styled, { css } from 'styled-components'
+import React, { useEffect, useRef, useState } from 'react'
+import styled from 'styled-components'
 import close from '../assets/close.png'
-import articleList from '../data/articleList'
 import handleMarkDownText from '../utils/handleMarkDownText'
 import Spin from './Loadings/Spin'
 import ArticleServices from '../services/ArticleServices'
 import { IArticle } from '../types/commonTypes'
+import { NavLink as Link } from 'react-router-dom'
 
 const Wrapper = styled.div`
   position: fixed;
   top: 0;
   left: 0;
-  width: 100%;
-  height: 100%;
+  width: 100%;  height: 100%;
   padding: 60px 20px;
   z-index: 9999;
-  //background: rgba(33, 150, 243, .2);
 `
 
 const ModalOverlay = styled.div`
@@ -47,12 +45,6 @@ const Header = styled.header`
   z-index: 3;
   border-top-left-radius: 12px;
   border-top-right-radius: 12px;
-`
-
-const InputWrapper = styled.div`
-  position: relative;
-  width: 100%;  height: 100%;
-  z-index: 2;
 `
 
 const Input = styled.input`
@@ -120,7 +112,7 @@ const Title = styled.h2`
 `
 
 const Content = styled.div`
-  overflow: scroll;
+  //overflow: scroll;
   display: block;
   text-overflow: ellipsis;
   font-size: 14px;
@@ -154,13 +146,22 @@ export default function (props: IProps) {
     setArticles(result.data)
   }
 
+  const inputRef = useRef<HTMLInputElement>(null)
+
   useEffect(() => {
     if (props.visible) {
+      // 隐藏使body滚动条
+      document.body.classList.add('onModal');
       (async () => {
         await search()
       })()
+      if (inputRef && inputRef.current) {
+        inputRef.current.focus()
+      }
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [props.visible])
+
 
   const onSubmit = async (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.keyCode === 13) {
@@ -174,12 +175,13 @@ export default function (props: IProps) {
         <Modal>
           <Header>
             <Input
+              ref={inputRef}
               placeholder='搜索文章'
               value={ props.value }
               onChange={ (e: React.ChangeEvent<HTMLInputElement>) => {
                 props.onChange(e.target.value)
               } }
-              onKeyDown={onSubmit}
+              onKeyDown={ onSubmit }
             />
             <CloseWrapper onClick={ () => props.onClose() }>
               <Close />
@@ -191,7 +193,9 @@ export default function (props: IProps) {
                 articles === null ? <Spin /> : (articles.length !== 0 ? articles.map(article => {
                   return (
                     <ListItem key={ article._id }>
-                      <Title>{ article.title }</Title>
+                      <Link to={ `/detail/${ article._id }` } onClick={ () => props.onClose() }>
+                        <Title>{ article.title }</Title>
+                      </Link>
                       <Content>{ handleMarkDownText(article.content) }</Content>
                     </ListItem>
                   )

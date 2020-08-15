@@ -23,14 +23,18 @@ export default class {
   }
 
   public static async filterArticlesByTitle(title: string): Promise<IArticle[] | null> {
+    // 忽视大小写
+    const reg = new RegExp(title, 'i')
     return ArticleModel.find({
-      title: { $regex: new RegExp(title) }
+      title: { $regex: reg }
     })
   }
 
   public static async filterArticlesByTag(tag: string): Promise<IArticle[] | null> {
+    // 忽视大小写
+    const reg = new RegExp(tag, 'i')
     return ArticleModel.find({
-      tagList: {"$in": [tag]}
+      tagList: {"$in": [reg]}
     })
   }
 

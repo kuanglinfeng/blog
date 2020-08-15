@@ -5,7 +5,6 @@ import { ArticleItem, PublishTime, TagItem, TagList, Title } from '../components
 import ArticleServices from '../services/ArticleServices'
 import { IArticle } from '../types/commonTypes'
 import Markdown from '../components/Markdown'
-import Loading from '../components/Loadings/Loading'
 import Spin from '../components/Loadings/Spin'
 
 interface IParams {

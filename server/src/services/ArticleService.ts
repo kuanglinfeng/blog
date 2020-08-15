@@ -52,21 +52,23 @@ export default class {
     }
     let articles: IArticle[] = []
     let count: number = 0
+    // 忽视大小写
+    const reg = new RegExp(newSearchCondition.keyword, 'i')
     if (newSearchCondition.keywordProp === 'title') {
       articles = await ArticleModel.find({
-        title: {$regex: new RegExp(newSearchCondition.keyword)}
+        title: {$regex: reg}
       }).sort({publishTime: -1}).skip((newSearchCondition.page - 1) * newSearchCondition.limit).limit(newSearchCondition.limit)
 
       count = await ArticleModel.find({
-        title: {$regex: new RegExp(newSearchCondition.keyword)}
+        title: {$regex: reg}
       }).countDocuments()
     } else {
       articles = await ArticleModel.find({
-        tagList: {"$in": [newSearchCondition.keyword]}
+        tagList: {"$in": [reg]}
       }).sort({publishTime: -1}).skip((newSearchCondition.page - 1) * newSearchCondition.limit).limit(newSearchCondition.limit)
 
       count = await ArticleModel.find({
-        tagList: {"$in": [newSearchCondition.keyword]}
+        tagList: {"$in": [reg]}
       }).countDocuments()
     }
 

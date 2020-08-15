@@ -58,21 +58,21 @@ export default function (props: IArticle) {
   return (
     <ArticleItem>
       <Title>
-        <Link to={`/detail/${props._id}`}>
-          {props.title}
+        <Link to={ `/detail/${ props._id }` }>
+          { props.title }
         </Link>
       </Title>
       <TimeTagWrapper>
         <PublishTime>
-          {props.publishTime.toLocaleDateString ? props.publishTime.toLocaleDateString() :  new Date(props.publishTime).toLocaleDateString()}
+          { props.publishTime.toLocaleDateString ? props.publishTime.toLocaleDateString() : new Date(props.publishTime).toLocaleDateString() }
         </PublishTime>
         <TagList>
           {
-            props.tagList.map((tag) => <TagItem key={tag}>{tag}</TagItem>)
+            props.tagList.map((tag) => <TagItem key={ tag }>{ tag }</TagItem>)
           }
         </TagList>
       </TimeTagWrapper>
-      <Content>{handleMarkDownText(props.content)}</Content>
+      <Content>{ handleMarkDownText(props.content) }</Content>
     </ArticleItem>
   )
 }

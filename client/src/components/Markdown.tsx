@@ -11,7 +11,6 @@ const Wrapper = styled.div`
   padding-left: 16px;
   box-sizing: border-box;
   border-radius: 3px;
-  border: 1px solid #eee;
 `
 
 interface IProps {

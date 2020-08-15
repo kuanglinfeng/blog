@@ -3,10 +3,9 @@ import ReactDOM from 'react-dom'
 import './index.css'
 import App from './App'
 import { BrowserRouter as Router, } from 'react-router-dom'
-import ArticleServices from './services/ArticleServices'
-
-// 测试搜索接口
-// ArticleServices.search({keywordProp: 'tag', keyword: '服务器'}).then(result => {
+// import ArticleServices from './services/ArticleServices'
+//
+// ArticleServices.search({keywordProp: 'tag', keyword: 'typescript'}).then(result => {
 //   console.log(result)
 // })
 
