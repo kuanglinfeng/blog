@@ -84,7 +84,7 @@ const Main = styled.main`
   height: 100%;
   top: 0;
   left: 0;
-  overflow-y: scroll;
+  overflow-y: auto;
   background-color: #fff;
   border-radius: 12px;
 `
@@ -161,7 +161,6 @@ export default function (props: IProps) {
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [props.visible])
-
 
   const onSubmit = async (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.keyCode === 13) {
