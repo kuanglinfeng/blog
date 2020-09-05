@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
-import search from '../assets/search.png'
+import search from '../../assets/search.png'
 
 const SearchInput = styled.input`
   height: 30px;

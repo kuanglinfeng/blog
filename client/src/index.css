@@ -28,6 +28,23 @@ code {
   white-space: pre-wrap;
 }
 
+code.hljs {
+  background: #f6f8fa;
+  word-break: normal;
+  overflow: auto;
+  font-size: 85%;
+  line-height: 1.45;
+  border-radius: 6px;
+  margin-bottom: 0;
+  white-space: pre;
+}
+
+.sc-fzpkqZ ol, ul {
+  padding: 0;
+  margin-left: 1.5em;
+}
+
+
 a {
   text-decoration: none;
   color: inherit; /* blue colors for links too */

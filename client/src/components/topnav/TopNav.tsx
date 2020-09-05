@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
 import styled  from 'styled-components'
-import logo from '../assets/logo.png'
-import menu from '../assets/menu.png'
-import Search from './Search'
+import logo from '../../assets/logo.png'
+import menu from '../../assets/menu.png'
+import Search from './SearchInput'
 import { NavLink as Link, useHistory } from 'react-router-dom'
 import SearchWindow from './SearchWindow'
 

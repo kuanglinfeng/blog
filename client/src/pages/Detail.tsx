@@ -1,11 +1,11 @@
 import React, { useState } from 'react'
 import styled from 'styled-components'
 import { useParams } from 'react-router-dom'
-import { ArticleItem, PublishTime, TagItem, TagList, Title } from '../components/ArticleItem'
+import { ArticleItem, PublishTime, TagItem, TagList, Title } from '../components/home/ArticleItem'
 import ArticleServices from '../services/ArticleServices'
 import { IArticle } from '../types/commonTypes'
-import Markdown from '../components/Markdown'
-import Spin from '../components/Loadings/Spin'
+import Markdown from '../components/markdown/Markdown'
+import Spin from '../components/loadings/Spin'
 
 interface IParams {
   id: string

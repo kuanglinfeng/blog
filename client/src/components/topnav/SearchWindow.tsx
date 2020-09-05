@@ -1,10 +1,10 @@
 import React, { useEffect, useRef, useState } from 'react'
 import styled from 'styled-components'
-import close from '../assets/close.png'
-import handleMarkDownText from '../utils/handleMarkDownText'
-import Spin from './Loadings/Spin'
-import ArticleServices from '../services/ArticleServices'
-import { IArticle } from '../types/commonTypes'
+import close from '../../assets/close.png'
+import handleMarkDownText from '../../utils/handleMarkDownText'
+import Spin from '../loadings/Spin'
+import ArticleServices from '../../services/ArticleServices'
+import { IArticle } from '../../types/commonTypes'
 import { NavLink as Link } from 'react-router-dom'
 
 const Wrapper = styled.div`

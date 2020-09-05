@@ -1,8 +1,8 @@
 import React from 'react'
 import styled from 'styled-components'
-import handleMarkDownText from '../utils/handleMarkDownText'
+import handleMarkDownText from '../../utils/handleMarkDownText'
 import { NavLink as Link } from 'react-router-dom'
-import { IArticle } from '../types/commonTypes'
+import { IArticle } from '../../types/commonTypes'
 
 export const ArticleItem = styled.div`
   background: #fff;

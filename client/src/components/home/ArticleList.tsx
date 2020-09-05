@@ -1,8 +1,8 @@
 import React, { useContext } from 'react'
 import styled from 'styled-components'
 import ArticleItem from './ArticleItem'
-import Loading from './Loadings/Loading'
-import { IArticleContext } from '../App'
+import Loading from '../loadings/Loading'
+import { IArticleContext } from '../../App'
 
 const ArticleList = styled.div``
 

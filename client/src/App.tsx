@@ -1,5 +1,5 @@
 import React, { createContext, useEffect, useReducer } from 'react'
-import TopNav from './components/TopNav'
+import TopNav from './components/topnav/TopNav'
 import { Switch, Route } from 'react-router-dom'
 import styled from 'styled-components'
 import About from './pages/About'
@@ -8,10 +8,12 @@ import Tags from './pages/Tags'
 import Detail from './pages/Detail'
 import articleReducer, { articleInitialState, IArticleContextValue } from './redux/articleReducer'
 import ArticleServices from './services/ArticleServices'
+import Tag from './pages/Tag'
 
 const Main = styled.main`
   max-width: 960px;
   margin: 10px auto 0;
+  overflow-x: hidden;
 `
 
 export const IArticleContext = createContext<IArticleContextValue | undefined>(undefined)
@@ -39,6 +41,9 @@ function App() {
           <Switch>
             <Route path="/detail/:id">
               <Detail />
+            </Route>
+            <Route path="/tag">
+              <Tag />
             </Route>
             <Route path="/tags">
               <Tags />
