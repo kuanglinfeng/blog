@@ -1,7 +1,6 @@
 import Express from 'express'
 import ArticleService from '../services/ArticleService'
 import ResponseHelper from './ResponseHelper'
-import ClientArticleService from '../services/ClientArticleService'
 
 const router = Express.Router()
 

@@ -3,7 +3,7 @@ import styled  from 'styled-components'
 import logo from '../assets/logo.png'
 import menu from '../assets/menu.png'
 import Search from './Search'
-import { NavLink as Link } from 'react-router-dom'
+import { NavLink as Link, useHistory } from 'react-router-dom'
 import SearchWindow from './SearchWindow'
 
 const TopNav = styled.nav`
@@ -116,8 +116,13 @@ export default function () {
   const [searchWindowVisible, setSearchWindowVisible] = useState<boolean>(false)
   const [keyword, setKeyword] = useState<string>('')
 
+  const history = useHistory()
+
   const handleMenuButtonClick = () => {
     setAsideVisible(!asideVisible)
+    history.listen(() => {
+      setAsideVisible(false)
+    })
   }
 
   const handleSearchInputSubmit = (e: React.KeyboardEvent<HTMLInputElement>) => {

@@ -65,4 +65,16 @@ export default class {
     if (articles === null)  return null
     return articles.filter(article => article.tagList.indexOf(tagsQuery.tag) !== -1)
   }
+
+  // 获取所有的标签下的文章
+  public static async getArticlesByAllTags() {
+    const tags = await this.getAllTags()
+    if (tags === null)  return null
+    const articlesHash: {[key: string]: IArticle[]} = {}
+    for (let i = 0; i < tags.length; i++) {
+      // @ts-ignore
+      articlesHash[tags[i]] = await this.getArticlesByTag({ tag: tags[i] })
+    }
+    return articlesHash
+  }
 }

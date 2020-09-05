@@ -13,20 +13,33 @@ type SearchCondition = {
 
 export default class {
   public static async getArticles(): Promise<IResponseData<IArticle[]>> {
-    const {data} = await axios.get('/articles')
+    const { data } = await axios.get('/articles')
     return data
   }
 
   public static async filterArticleById(id: string): Promise<IResponseData<IArticle>> {
-    const {data} = await axios.get('/detail/' + id)
+    const { data } = await axios.get('/detail/' + id)
     return data
   }
 
   public static async search(condition: SearchCondition): Promise<IResponseData<IArticle[]>> {
-    const {data} = await axios.get('/search', {
+    const { data } = await axios.get('/search', {
       params: condition
     })
     return data
   }
+
+  public static async getArticlesByAllTag() {
+    const { data } = await axios.get('/tags')
+    return data
+  }
+
+  public static async getArticlesByTag(tag: string) {
+    const { data } = await axios.get('/tag', {
+      params: { tag }
+    })
+    return data
+  }
+
 
 }

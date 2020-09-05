@@ -33,7 +33,7 @@ router.get('/search', async (request, response) => {
 
 router.get('/tags', async (request, response) => {
   try {
-    const articles = await ClientArticleService.getAllTags()
+    const articles = await ClientArticleService.getArticlesByAllTags()
     ResponseHelper.sendData(articles, response)
   } catch (e) {
     ResponseHelper.sendData(null, response)
