@@ -9,7 +9,8 @@ type ArticleListProps = {
 }
 
 export const ArticleList = styled.ul`
-  padding: 5px 10px;
+  margin: 0;
+  padding: 0 1.5em;
   border-bottom: 1px #eef2f8;
   border-bottom-style: ${ (props: ArticleListProps) => props.borderBottom };
 `

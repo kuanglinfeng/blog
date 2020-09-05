@@ -17,9 +17,8 @@ export const Title = styled.h2`
   font-weight: normal;
   margin: 0.5em 0;
   line-height: 1.5em;
-  color: #304455;
+  color: #34ADB5;
   & > a:hover {
-    color: #34ADB5;
     cursor: pointer;
   }
 `

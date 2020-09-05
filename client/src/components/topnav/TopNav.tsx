@@ -40,6 +40,7 @@ const AsideNav = styled.ul`
   list-style: none;
   display: none;
   @media (max-width: 740px) {
+    margin: 20px 0;
     display:block;
     position: absolute;
     top: 50px; left: 0;

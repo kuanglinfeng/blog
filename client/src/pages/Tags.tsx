@@ -5,6 +5,7 @@ import { IArticle } from '../types/commonTypes'
 import { useHistory } from 'react-router-dom'
 import Spin from '../components/loadings/Spin'
 import TagItem from '../components/TagItem'
+import tagColors from '../config/tagColors'
 
 export const Wrapper = styled.div`
   padding: 20px;
@@ -18,7 +19,8 @@ interface ITagProps {
 }
 
 const TagWrapper = styled.ul`
-  padding: 8px 0;
+  padding: 0 1.5em;
+  margin: 0;
 `
 
 const Title = styled.h3`
@@ -42,16 +44,6 @@ const Tag = styled.li<ITagProps>`
   background-color: ${ props => props.backgroundColor || '#fff0f6' };
   border-color: ${ props => props.borderColor || '#ffadd2' };
 `
-
-const tagColorHash = [
-  { color: '#eb2f96', backgroundColor: '#fff0f6', borderColor: '#ffadd2' },
-  { color: '#eb2f96', backgroundColor: '#fff0f6', borderColor: '#ffadd2' },
-  { color: '#52c41a', backgroundColor: '#f6ffed', borderColor: '#b7eb8f' },
-  { color: '#13c2c2', backgroundColor: '#e6fffb', borderColor: '#87e8de' },
-  { color: '#faad14', backgroundColor: '#fffbe6', borderColor: '#ffe58f' },
-  { color: '#722ed1', backgroundColor: '#f9f0ff', borderColor: '#d3adf7' },
-  { color: '#1890ff', backgroundColor: '#e6f7ff', borderColor: '#91d5ff' }
-]
 
 interface ArticleHash {
   [key: string]: IArticle[]
@@ -79,7 +71,7 @@ export default function () {
       <TagWrapper>
         { tags!.map((tag) => {
           return (
-            <Tag key={ tag } { ...tagColorHash[tag.length % 7] } onClick={ () => {
+            <Tag key={ tag } { ...tagColors[tag.length % 7] } onClick={ () => {
               history.push(`/tag?tag=${ tag }`)
             } }>{ tag }</Tag>
           )

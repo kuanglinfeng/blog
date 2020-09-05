@@ -33,7 +33,7 @@ const Modal = styled.div`
   background: #fff;
   box-shadow: 0 7px 8px -4px rgba(0,0,0,.2), 0 13px 19px 2px rgba(0,0,0,.14), 0 5px 24px 4px rgba(0,0,0,.12);
   z-index: 3;
-  border-radius: 12px;
+  border-radius: 5px;
   overflow: hidden;
 `
 
@@ -43,8 +43,6 @@ const Header = styled.header`
   height: 64px;
   background-color: #34ADB5;
   z-index: 3;
-  border-top-left-radius: 12px;
-  border-top-right-radius: 12px;
 `
 
 const Input = styled.input`
@@ -79,14 +77,14 @@ const Close = styled.span`
 
 const Main = styled.main`
   position: absolute;
-  padding: 64px 50px 80px 50px;
+  padding: 63px 32px;
   width: 100%;
   height: 100%;
   top: 0;
   left: 0;
   overflow-y: auto;
   background-color: #fff;
-  border-radius: 12px;
+  border-radius: 5px;
 `
 
 const List = styled.ul`

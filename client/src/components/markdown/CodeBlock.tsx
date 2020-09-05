@@ -20,7 +20,7 @@ export default function (props: IProps) {
 
   return (
     <pre>
-      <code ref={ ref } className={ `language-${ props.language }` }>
+      <code ref={ ref } className={ `language-${ props.language === 'vue' ? 'html' : props.language }` }>
         { props.value }
       </code>
     </pre>
