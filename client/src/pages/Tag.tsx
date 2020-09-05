@@ -23,7 +23,7 @@ export default function () {
       const result = await ArticleServices.getArticlesByTag(search.tag)
       setArticles(result.data)
     })()
-  })
+  }, [search.tag])
 
   return (
     articles.length === 0 ? <Spin /> :
