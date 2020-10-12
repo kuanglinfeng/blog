@@ -71,7 +71,6 @@ function deleteArticle(state: IArticleState, action: DeleteArticleAction): IArti
   }
 }
 
-
 export default (state: IArticleState = initialState, action: ArticleActions): IArticleState => {
   if (action.type === ArticleActionTypeEnums.Save) {
     return saveArticle(state, action)

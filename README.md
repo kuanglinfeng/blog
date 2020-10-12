@@ -39,6 +39,12 @@ content-type: multipart/form-data
 ## 后台请求服务器的接口设计
 
 
+## 部署
+
+1. 服务端 端口：6767
+2. client端 端口：6768
+3. admin端 端口：6769
+
 
 
 
