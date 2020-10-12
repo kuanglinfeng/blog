@@ -1,7 +1,8 @@
 import { IArticle } from '../../services/ArticleService'
 import { ISearchCondition } from '../../services/commonTypes'
 import {
-  ArticleActions, DeleteArticleAction,
+  ArticleActions,
+  DeleteArticleAction,
   SaveArticleAction,
   SetLoadingAction,
   SetSearchConditionAction
@@ -62,14 +63,12 @@ function setSearchCondition(state: IArticleState, action: SetSearchConditionActi
 }
 
 function deleteArticle(state: IArticleState, action: DeleteArticleAction): IArticleState {
-  const newState = {
+  return {
     ...state,
     data: state.data.filter(article => article._id !== action.payload),
     total: state.total - 1,
     totalPage: Math.ceil((state.total - 1) / state.searchCondition.limit)
   }
-  console.log(newState)
-  return newState
 }
 
 

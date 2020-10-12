@@ -4,6 +4,7 @@ import { NavLink, Route } from 'react-router-dom'
 import ArticleList from 'pages/article/ArticleList'
 import AddArticle from 'pages/article/AddArticle'
 import EditArticle from 'pages/article/EditArticle'
+import UploadImage from 'pages/article/UploadImage'
 
 const { Header, Sider, Content } = Layout
 
@@ -27,6 +28,9 @@ const Home: React.FC = () => {
               <Menu.Item key="2">
                 <NavLink to='/article/add'>添加文章</NavLink>
               </Menu.Item>
+              <Menu.Item key="3">
+                <NavLink to='/article/image'>上传图片</NavLink>
+              </Menu.Item>
             </Menu>
           </Sider>
           <Content>
@@ -35,6 +39,7 @@ const Home: React.FC = () => {
               <Route path='/article' component={ArticleList} exact />
               <Route path='/article/add' component={AddArticle} exact />
               <Route path='/article/edit/:id' component={EditArticle} exact />
+              <Route path='/article/image' component={UploadImage} exact />
             </div>
           </Content>
         </Layout>
