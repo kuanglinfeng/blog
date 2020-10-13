@@ -3,15 +3,17 @@ import { Upload, Button, message } from 'antd'
 import { UploadOutlined } from '@ant-design/icons'
 import { UploadFile } from 'antd/es/upload/interface'
 import axios from 'axios'
+import url from 'services/url'
 
-const uploadUrl = 'http://localhost:3000/upload'
+const uploadUrl = url + '/upload'
+const uploadApiUrl = url + '/api/upload'
 
 export default () => {
 
   const [files, setFiles] = useState<UploadFile[]>([])
 
   const getFiles = async () => {
-    const result = await axios.get('/api/upload')
+    const result = await axios.get(uploadApiUrl)
     const arr: UploadFile[] = []
     result.data.data.forEach((fileName: string) => {
       arr.push({
@@ -34,7 +36,7 @@ export default () => {
   }
 
   const onRemove = async (file: UploadFile) => {
-    const result = await axios.delete('/api/upload/' + file.name)
+    const result = await axios.delete(uploadApiUrl + '/' + file.name)
     if (result.data.data.error) {
       message.error(result.data.data.error)
     } else {
@@ -46,7 +48,7 @@ export default () => {
   return (
     <>
       <Upload
-        action="/api/upload"
+        action={uploadApiUrl}
         name="imageFile"
         listType="picture"
         accept=".jpeg,.jpg,.png,.gif"

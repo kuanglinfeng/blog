@@ -44,8 +44,12 @@ code.hljs {
   margin-left: 1.5em;
 }
 
-.sc-fzqMdD img {
-  width: 100%;
+img {
+  max-width: 100%;
+  width: auto;
+  height: auto;
+  vertical-align: middle;
+  border: 0;
 }
 a {
   text-decoration: none;

@@ -2,7 +2,7 @@
 // 客户端的请求接口，请求所有文章
 import ClientArticleService, { ClientSearchCondition, TagsQuery } from '../services/ClientArticleService'
 import ResponseHelper from './ResponseHelper'
-import Express, { response } from 'express'
+import Express from 'express'
 
 const router = Express.Router()
 

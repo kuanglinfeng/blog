@@ -41,9 +41,9 @@ content-type: multipart/form-data
 
 ## 部署
 
-1. 服务端 端口：6767
-2. client端 端口：6768
-3. admin端 端口：6769
+1. 服务端 端口：5500
+2. admin端 http://blogsys.kuanglinfeng.com
+3. client端 https://kuanglinfeng.com
 
 
 
