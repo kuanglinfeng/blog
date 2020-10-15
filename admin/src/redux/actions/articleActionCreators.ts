@@ -3,6 +3,10 @@ import { DeleteArticleAction, SaveArticleAction, SetLoadingAction, SetSearchCond
 import { ArticleActionTypeEnums } from './ActionTypes'
 import { ISearchCondition } from '../../services/commonTypes'
 
+export const createAuthenticate = () => ({
+  type: 'authSuccess'
+})
+
 export const createSaveArticleAction = (articles: IArticle[], total: number): SaveArticleAction => ({
   type: ArticleActionTypeEnums.Save,
   payload: { articles, total }

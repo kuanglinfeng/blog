@@ -13,7 +13,7 @@ import { ArticleActionTypeEnums } from '../actions/ActionTypes'
 export type IArticleCondition = Required<ISearchCondition>
 
 export interface IArticleState {
-
+  isAuthenticated: boolean,
   data: IArticle[]
   searchCondition: IArticleCondition
   total: number
@@ -22,6 +22,7 @@ export interface IArticleState {
 }
 
 export const initialState: IArticleState = {
+  isAuthenticated: false,
   data: [],
   searchCondition: {
     page: 1,
@@ -32,6 +33,13 @@ export const initialState: IArticleState = {
   total: 0,
   isLoading: false,
   totalPage: 0
+}
+
+function authSuccess(state: IArticleState) {
+  return {
+    ...state,
+    authenticate: true
+  }
 }
 
 function saveArticle(state: IArticleState, action: SaveArticleAction): IArticleState {
@@ -72,6 +80,9 @@ function deleteArticle(state: IArticleState, action: DeleteArticleAction): IArti
 }
 
 export default (state: IArticleState = initialState, action: ArticleActions): IArticleState => {
+  if (action.type === 'authSuccess') {
+    return authSuccess(state)
+  }
   if (action.type === ArticleActionTypeEnums.Save) {
     return saveArticle(state, action)
   }

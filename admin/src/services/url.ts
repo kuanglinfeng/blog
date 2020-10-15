@@ -1,2 +1,3 @@
 const url = 'https://blog.kuanglinfeng.com'
-export default url
+const testUrl = 'http://localhost:5500'
+export default testUrl

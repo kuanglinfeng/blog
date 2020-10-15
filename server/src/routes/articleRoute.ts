@@ -4,7 +4,6 @@ import ResponseHelper from './ResponseHelper'
 
 const router = Express.Router()
 
-
 // 根据id获取单篇文章，详情页使用，这里用params
 router.get('/:id', async (request, response) => {
   try {

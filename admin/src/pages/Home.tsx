@@ -8,13 +8,12 @@ import UploadImage from 'pages/article/UploadImage'
 
 const { Header, Sider, Content } = Layout
 
-
 const Home: React.FC = () => {
   return (
     <div className='container'>
       <Layout>
         <Header className='header'>
-          <NavLink to='/' >个人博客后台管理系统</NavLink>
+          <NavLink to='/article' >个人博客后台管理系统</NavLink>
         </Header>
         <Layout>
           <Sider>
@@ -35,7 +34,6 @@ const Home: React.FC = () => {
           </Sider>
           <Content>
             <div className="main">
-              <Route path='/' component={ArticleList} exact />
               <Route path='/article' component={ArticleList} exact />
               <Route path='/article/add' component={AddArticle} exact />
               <Route path='/article/edit/:id' component={EditArticle} exact />

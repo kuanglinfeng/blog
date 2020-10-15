@@ -3,11 +3,15 @@ import Express  from 'express'
 import cors from 'cors'
 import articleRoute from './routes/articleRoute'
 import clientArticleRoute from './routes/clientArticleRoute'
-import uploadRouter from './routes/uploadRoute'
+import uploadRoute from './routes/uploadRoute'
+import loginRoute from './routes/loginRoute'
+import authRoute from './routes/authRoute'
 
 const app = Express()
 
 const allowList = [
+  'http://localhost:3000',
+  'http://localhost:3001',
   'https://www.kuanglinfeng.com',
   'https://kuanglinfeng.com',
   'http://blogsys.kuanglinfeng.com',
@@ -35,10 +39,15 @@ app.use(Express.json({limit: '50mb'}))
 app.use('/', clientArticleRoute)
 
 // 管理端路由
+// 用户登录接口，登录成功返回token给用户，需要用户传账号和密码到request.body带给服务器
+app.use('/api/login', loginRoute)
+// 用户鉴权接口，鉴权成功返回true，需要用户传token到请求头request.headers：Authorization: Bearer token值
+app.use('/api/auth', authRoute)
+// 用户操作文章的接口
 app.use('/api/article', articleRoute)
 
 // 文件上传
 // 通常情况下，服务器会提供一个统一的aip接口，用于处理上传的文件
-app.use('/api/upload', uploadRouter)
+app.use('/api/upload', uploadRoute)
 
 app.listen(5500, () => console.log(`http://localhost:5500`))

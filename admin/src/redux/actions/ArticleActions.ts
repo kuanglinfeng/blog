@@ -12,4 +12,4 @@ export type SetSearchConditionAction = IAction<ArticleActionTypeEnums.SetSearchC
 
 export type DeleteArticleAction = IAction<ArticleActionTypeEnums.Delete, string>
 
-export type ArticleActions = SaveArticleAction | SetLoadingAction | SetSearchConditionAction | DeleteArticleAction
+export type ArticleActions = SaveArticleAction | SetLoadingAction | SetSearchConditionAction | DeleteArticleAction | {type: 'authSuccess'}
