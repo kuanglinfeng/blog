@@ -3,7 +3,7 @@ import bcrypt from 'bcrypt'
 import jwt from 'jsonwebtoken'
 import { UserModel } from '../db/'
 import ResponseHelper from '../routes/ResponseHelper'
-import PrivateKey from '../PrivateKey'
+import PrivateKey from '../services/PrivateKey'
 
 const router = Express.Router()
 

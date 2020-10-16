@@ -6,10 +6,7 @@ import zhCN from 'antd/es/locale/zh_CN'
 import articleReducer, { IArticleState, initialState } from './redux/reducers/articleReducer'
 import { ArticleActions } from './redux/actions/ArticleActions'
 import Login from 'pages/Login'
-import ArticleList from 'pages/article/ArticleList'
-import AddArticle from 'pages/article/AddArticle'
-import EditArticle from 'pages/article/EditArticle'
-import UploadImage from 'pages/article/UploadImage'
+import PrivateRoute from 'components/PrivateRoute'
 
 export interface IContextValue {
   state: IArticleState
@@ -27,8 +24,10 @@ function App() {
       <Context.Provider value={ { state, dispatch } }>
         <Router>
           <Switch>
-            <Route path='/article' component={Home} />
-            <Route path='/' component={Login} />
+            <Route path='/login' component={Login}  />
+            <PrivateRoute path='/'>
+              <Home />
+            </PrivateRoute>
           </Switch>
         </Router>
       </Context.Provider>

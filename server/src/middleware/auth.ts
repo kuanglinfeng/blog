@@ -1,7 +1,7 @@
 import jwt from 'jsonwebtoken'
 import { NextFunction, Request, Response } from 'express'
 import { UserModel } from '../db'
-import PrivateKey from '../../src/PrivateKey'
+import PrivateKey from '../services/PrivateKey'
 import { User } from '../db/UserSchema'
 
 export interface EnhanceRequest extends Request {

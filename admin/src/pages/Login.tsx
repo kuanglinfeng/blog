@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
 import { Button, Card, Input, message, Spin } from 'antd'
 import { KeyOutlined, UserOutlined } from '@ant-design/icons'
-import user from 'constant/user'
 import { useHistory } from 'react-router-dom'
+import AuthService from 'services/AuthService'
 
 export default () => {
 
@@ -11,7 +11,7 @@ export default () => {
   const [isLoading, setIsLoading] = useState(false)
   const history = useHistory()
 
-  const checkLogin = () => {
+  const checkLogin = async () => {
     setIsLoading(true)
     if (!username) {
       message.error('用户名不能为空！')
@@ -26,13 +26,22 @@ export default () => {
       }, 500)
       return false
     }
-    if (username === user.username && password === user.password) {
-      history.push('/article')
+    const result = await AuthService.login({username, password})
+    const token = result.data
+    if (token) {
+      window.localStorage.setItem('token', token)
+      history.push('/')
     } else {
       message.error('用户名密码错误！')
       setTimeout(() => {
         setIsLoading(false)
       }, 500)
+    }
+  }
+
+  const onKeyDown = async (e: KeyboardEvent) => {
+    if (e.key === 'Enter') {
+      await checkLogin()
     }
   }
 
@@ -65,6 +74,8 @@ export default () => {
             onChange={e => {
               setPassword(e.target.value)
             }}
+            // @ts-ignore
+            onKeyDown={onKeyDown}
           />
           <br/><br/>
           <Button

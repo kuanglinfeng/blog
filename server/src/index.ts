@@ -11,7 +11,6 @@ const app = Express()
 
 const allowList = [
   'http://localhost:3000',
-  'http://localhost:3001',
   'https://www.kuanglinfeng.com',
   'https://kuanglinfeng.com',
   'http://blogsys.kuanglinfeng.com',

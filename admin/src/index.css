@@ -26,6 +26,14 @@ code {
 
 .container .header {
   color: #1890ff;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.container .header button {
+  background: #001529;
+  color: white;
 }
 
 .main {
